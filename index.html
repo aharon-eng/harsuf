@@ -39,6 +39,38 @@
   <div class="foot">התוכן מוצפן (AES-256) · ההרשאה נקבעת לפי הסיסמה</div>
 </div>
 <script>
+/* ===== דף דירה לשיתוף (#unit=) — כרטיס שיווקי אישי ללקוח מתעניין ===== */
+(function(){
+ if(!location.hash.startsWith("#unit="))return;
+ let f={};try{f=JSON.parse(decodeURIComponent(escape(atob(location.hash.slice(6)))))}catch(e){return}
+ document.addEventListener("DOMContentLoaded",function(){
+  var hero=f.k==="garden"?"pub/garden.jpg":f.k==="mini"?"pub/mini.jpg":f.k==="ph"?"pub/ph.jpg":("pub/b"+(f.g||"178")+".jpg");
+  document.body.style.cssText="margin:0;font-family:Segoe UI,Arial;background:#FDFBF6";
+  document.body.innerHTML=
+   '<div style="max-width:760px;margin:0 auto;padding:0 0 50px">'+
+   '<div style="position:relative;height:250px;overflow:hidden">'+
+   '<img src="'+hero+'" style="width:100%;height:100%;object-fit:cover" onerror="this.remove()">'+
+   '<div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,14,11,.15),rgba(16,14,11,.85))"></div>'+
+   '<div style="position:absolute;bottom:14px;right:18px;left:18px;color:#EFE8DA">'+
+   '<div style="letter-spacing:.15em;font-size:15px;color:#E2C68C;font-weight:300">הַר סוּף <b>BOUTIQUE</b> · אילת</div>'+
+   '<div style="font-size:25px;font-weight:700">בניין '+(f.b||"")+' · דירה '+(f.a||"")+'</div>'+
+   '<div style="font-size:14px;color:#CBBFA6">'+(f.t||"")+' · '+(f.r||"")+' חדרים · קומה '+(f.f||"")+' · מגרש '+(f.g||"")+'</div></div></div>'+
+   '<div style="padding:16px 16px 0">'+
+   '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">'+
+   '<div style="background:#fff;border:1px solid #E4DED2;border-radius:12px;padding:12px 14px"><div style="font-size:11px;color:#8F7440;font-weight:700">שטח דירה</div><div style="font-size:18px;font-weight:700;color:#241F15">'+(f.ar?f.ar+' מ"ר':"—")+'</div></div>'+
+   '<div style="background:#fff;border:1px solid #E4DED2;border-radius:12px;padding:12px 14px"><div style="font-size:11px;color:#8F7440;font-weight:700">מרפסת / גינה</div><div style="font-size:18px;font-weight:700;color:#241F15">'+(f.ba?f.ba+' מ"ר':"—")+'</div></div>'+
+   (f.p?'<div style="grid-column:1/-1;background:linear-gradient(135deg,#221D15,#3A2F1D);border-radius:12px;padding:14px"><div style="font-size:11px;color:#C9A566;font-weight:700">מחיר מחירון</div><div style="font-size:24px;font-weight:700;color:#E2C68C">₪ '+Number(f.p).toLocaleString()+'</div></div>':"")+'</div>'+
+   '<div style="background:#fff;border:1px solid #E4DED2;border-radius:14px;padding:16px" id="planbox">'+
+   '<div style="font-size:12px;color:#8F7440;font-weight:700;margin-bottom:8px">תוכנית הדירה</div>'+
+   '<img id="planimg" style="width:100%;border-radius:10px;border:1px solid #E4DED2"></div>'+
+   '<div style="background:#F7F1E3;border-radius:12px;padding:14px;margin-top:14px;text-align:center;font-size:14px;color:#6E6350">'+
+   'לתיאום ביקור וסיור בדירה:<br><b style="color:#8F7440;font-size:16px">יריב גלילי — שיווק הר סוף בוטיק</b><br>'+
+   '<span style="font-size:12px">אדני ארץ — שם שיכון ויזמות · 02.659.0700</span></div></div></div>';
+  var pi=document.getElementById("planimg");
+  pi.onerror=function(){if(f.ty&&!pi.retry){pi.retry=1;pi.src="plans/T"+String(f.ty).charAt(0)+".jpg"}else document.getElementById("planbox").style.display="none"};
+  pi.src="plans/"+(f.u||"")+".jpg";
+ });
+})();
 /* ===== אזור אישי לרוכש (#portal=) — ללא סיסמה, ללא נתוני מחירים ===== */
 (function(){
  if(!location.hash.startsWith("#portal="))return;
