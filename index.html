@@ -39,6 +39,49 @@
   <div class="foot">התוכן מוצפן (AES-256) · ההרשאה נקבעת לפי הסיסמה</div>
 </div>
 <script>
+/* ===== אזור אישי לרוכש (#portal=) — ללא סיסמה, ללא נתוני מחירים ===== */
+(function(){
+ if(!location.hash.startsWith("#portal="))return;
+ let f={};try{f=JSON.parse(decodeURIComponent(escape(atob(location.hash.slice(8)))))}catch(e){return}
+ const EX=["היתר ותנאים","התארגנות באתר","חפירה ודיפון","ביסוס","שלד","גמרים ומערכות","פיתוח","טופס 4","מסירות"];
+ document.addEventListener("DOMContentLoaded",()=>{
+  document.body.style.cssText="margin:0;font-family:Segoe UI,Arial;background:#FDFBF6";
+  document.body.innerHTML=
+   '<div style="max-width:760px;margin:0 auto;padding:24px 16px 60px">'+
+   '<div style="text-align:center;color:#8F7440;letter-spacing:.15em;font-size:24px;font-weight:300">הַר סוּף <b>BOUTIQUE</b></div>'+
+   '<div style="text-align:center;color:#6E6350;font-size:12px;margin-bottom:22px">אדני ארץ — שם שיכון ויזמות · האזור האישי שלך</div>'+
+   '<div style="background:linear-gradient(135deg,#221D15,#3A2F1D);border-radius:16px;padding:26px 22px;color:#EFE8DA;margin-bottom:16px">'+
+   '<div style="font-size:22px;font-weight:600;color:#E2C68C">שלום '+(f.n||"רוכש יקר")+', ברוכים הבאים הביתה 🏖️</div>'+
+   '<p style="font-size:14px;line-height:1.8;color:#CBBFA6;margin:10px 0 0">אנו באדני ארץ שמחים ונרגשים שבחרתם את ביתכם החדש בפרויקט הר סוף בוטיק — רובע המגורים החדש של אילת. מהרגע הזה אנחנו איתכם בכל צעד בדרך: מעקב אחר התקדמות הבנייה, מסמכים, וכל שאלה — הכול כאן, במקום אחד שנבנה בשבילכם.</p></div>'+
+   '<div style="background:#fff;border:1px solid #E4DED2;border-radius:14px;padding:18px 20px;margin-bottom:16px">'+
+   '<div style="font-size:13px;color:#8F7440;font-weight:700;letter-spacing:.06em;margin-bottom:8px">הדירה שלך</div>'+
+   '<div style="font-size:19px;font-weight:600;color:#241F15">בניין '+(f.b||"")+' · דירה '+(f.a||"")+'</div>'+
+   '<div style="font-size:14px;color:#6E6350;margin-top:3px">'+(f.t||"")+' · '+(f.r||"")+' חדרים · קומה '+(f.f||"")+' · מגרש '+(f.g||"")+'</div></div>'+
+   '<div style="background:#fff;border:1px solid #E4DED2;border-radius:14px;padding:18px 20px;margin-bottom:16px" id="planbox">'+
+   '<div style="font-size:13px;color:#8F7440;font-weight:700;letter-spacing:.06em;margin-bottom:10px">תוכנית הדירה שלך</div>'+
+   '<img id="planimg" style="width:100%;border-radius:10px;border:1px solid #E4DED2" alt="תוכנית הדירה"></div>'+
+   '<div style="background:#fff;border:1px solid #E4DED2;border-radius:14px;padding:18px 20px;margin-bottom:16px">'+
+   '<div style="font-size:13px;color:#8F7440;font-weight:700;letter-spacing:.06em;margin-bottom:12px">התקדמות הבנייה</div>'+
+   '<div id="exbar" style="background:#F0EADC;border-radius:999px;height:14px;overflow:hidden;margin-bottom:10px"><div id="exfill" style="height:100%;width:0%;background:linear-gradient(90deg,#8F7440,#C9A566);border-radius:999px;transition:width 1s"></div></div>'+
+   '<div id="exsteps" style="display:flex;flex-wrap:wrap;gap:6px"></div>'+
+   '<div id="exnote" style="font-size:13px;color:#6E6350;margin-top:10px"></div>'+
+   '<div id="exupd" style="margin-top:8px"></div></div>'+
+   '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">'+
+   '<a href="https://wa.me/97226590700?text='+encodeURIComponent("שלום, אני "+(f.n||"")+" — רוכש/ת בבניין "+(f.b||"")+" דירה "+(f.a||"")+" בהר סוף בוטיק. ")+'" style="text-decoration:none;background:linear-gradient(180deg,#C9A566,#8F7440);color:#17130C;border-radius:12px;padding:15px 10px;text-align:center;font-weight:700;font-size:14px">💬 צ׳אט עם החברה</a>'+
+   '<a href="mailto:Office@adnei-eretz.com?subject='+encodeURIComponent("פנייה לעו\"ד החברה — "+(f.n||"")+" בניין "+(f.b||"")+" דירה "+(f.a||""))+'" style="text-decoration:none;background:#fff;border:1.5px solid #8F7440;color:#8F7440;border-radius:12px;padding:15px 10px;text-align:center;font-weight:700;font-size:14px">⚖️ פנייה לעו״ד החברה</a>'+
+   '<a href="mailto:Office@adnei-eretz.com?subject='+encodeURIComponent("מסמכים — "+(f.n||"")+" בניין "+(f.b||"")+" דירה "+(f.a||""))+'&body='+encodeURIComponent("שלום, מצורפים מסמכי ההרשמה/החוזה שלי. "+(f.n||""))+'" style="grid-column:1/-1;text-decoration:none;background:#fff;border:1.5px solid #B9AE97;color:#6E6350;border-radius:12px;padding:15px 10px;text-align:center;font-weight:700;font-size:14px">📎 שליחת מסמכי הרשמה וחוזה (צרפו קבצים למייל שנפתח)</a></div>'+
+   '<div style="text-align:center;font-size:12px;color:#9B9080">אדני ארץ — שם שיכון ויזמות בע״מ · 02.659.0700 · Office@adnei-eretz.com</div></div>';
+  const pi=document.getElementById("planimg");
+  pi.onerror=function(){if(f.k&&!pi.retry){pi.retry=1;pi.src="plans/T"+f.k+".jpg"}else document.getElementById("planbox").style.display="none"};
+  pi.src="plans/"+(f.u||"")+".jpg";
+  fetch("p.json?v="+Date.now().toString(36),{cache:"no-store"}).then(r=>r.json()).then(p=>{
+   const idx=p.exec||0;document.getElementById("exfill").style.width=Math.round((idx+1)/EX.length*100)+"%";
+   document.getElementById("exsteps").innerHTML=EX.map((s,i)=>'<span style="font-size:11.5px;padding:4px 10px;border-radius:999px;'+(i<idx?"background:#F0EADC;color:#8F7440":i===idx?"background:#C9A566;color:#17130C;font-weight:700":"background:#F7F4EE;color:#B9AE97")+'">'+s+'</span>').join("");
+   document.getElementById("exnote").textContent=p.note?("עדכון אחרון: "+p.note):"";
+   if(p.updates&&p.updates.length)document.getElementById("exupd").innerHTML=p.updates.map(u=>'<div style="font-size:12.5px;color:#6E6350;border-right:2px solid #C9A566;padding-right:8px;margin-top:6px"><b>'+u.d+'</b> — '+u.t+'</div>').join("");
+  }).catch(()=>{});
+ });
+})();
 /* ===== מצב חתימה ללקוח (#sign=) — ללא סיסמה, מציג את הטופס בלבד ===== */
 (function(){
  if(!location.hash.startsWith("#sign="))return;
