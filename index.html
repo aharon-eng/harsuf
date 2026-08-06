@@ -66,14 +66,46 @@
    '<div id="exsteps" style="display:flex;flex-wrap:wrap;gap:6px"></div>'+
    '<div id="exnote" style="font-size:13px;color:#6E6350;margin-top:10px"></div>'+
    '<div id="exupd" style="margin-top:8px"></div></div>'+
-   '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">'+
-   '<a href="https://wa.me/97226590700?text='+encodeURIComponent("שלום, אני "+(f.n||"")+" — רוכש/ת בבניין "+(f.b||"")+" דירה "+(f.a||"")+" בהר סוף בוטיק. ")+'" style="text-decoration:none;background:linear-gradient(180deg,#C9A566,#8F7440);color:#17130C;border-radius:12px;padding:15px 10px;text-align:center;font-weight:700;font-size:14px">💬 צ׳אט עם החברה</a>'+
-   '<a href="mailto:Office@adnei-eretz.com?subject='+encodeURIComponent("פנייה לעו\"ד החברה — "+(f.n||"")+" בניין "+(f.b||"")+" דירה "+(f.a||""))+'" style="text-decoration:none;background:#fff;border:1.5px solid #8F7440;color:#8F7440;border-radius:12px;padding:15px 10px;text-align:center;font-weight:700;font-size:14px">⚖️ פנייה לעו״ד החברה</a>'+
-   '<a href="mailto:Office@adnei-eretz.com?subject='+encodeURIComponent("מסמכים — "+(f.n||"")+" בניין "+(f.b||"")+" דירה "+(f.a||""))+'&body='+encodeURIComponent("שלום, מצורפים מסמכי ההרשמה/החוזה שלי. "+(f.n||""))+'" style="grid-column:1/-1;text-decoration:none;background:#fff;border:1.5px solid #B9AE97;color:#6E6350;border-radius:12px;padding:15px 10px;text-align:center;font-weight:700;font-size:14px">📎 שליחת מסמכי הרשמה וחוזה (צרפו קבצים למייל שנפתח)</a></div>'+
+   '<div style="background:#fff;border:1px solid #E4DED2;border-radius:14px;padding:18px 20px;margin-bottom:16px">'+
+   '<div style="font-size:13px;color:#8F7440;font-weight:700;letter-spacing:.06em;margin-bottom:10px">מרכז ההודעות שלך</div>'+
+   '<div style="display:flex;gap:8px;margin-bottom:12px">'+
+   '<button id="tabC" style="flex:1;border-radius:999px;padding:9px;border:none;background:#C9A566;color:#17130C;font-weight:700;font-size:13.5px;font-family:inherit">💬 צ׳אט עם החברה</button>'+
+   '<button id="tabL" style="flex:1;border-radius:999px;padding:9px;border:1.5px solid #C9A566;background:#fff;color:#8F7440;font-weight:700;font-size:13.5px;font-family:inherit">⚖️ צ׳אט עם עו״ד</button></div>'+
+   '<div id="thread" style="max-height:300px;min-height:120px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;background:#FBF9F4;border-radius:10px;padding:10px"></div>'+
+   '<div style="display:flex;gap:8px;margin-top:10px">'+
+   '<input id="msgin" placeholder="כתבו לנו הודעה..." style="flex:1;border:1.5px solid #E4DED2;border-radius:10px;padding:11px 12px;font-size:16px;font-family:inherit">'+
+   '<button id="msgsend" style="background:linear-gradient(180deg,#C9A566,#8F7440);color:#17130C;border:none;border-radius:10px;padding:11px 20px;font-weight:700;font-family:inherit">שלח</button></div>'+
+   '<div style="font-size:11px;color:#9B9080;margin-top:6px">אנו עונים בשעות הפעילות — ההודעות נשמרות וניתן לחזור לכאן בכל עת</div></div>'+
+   '<div style="display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:16px">'+
+   '<a href="mailto:Office@adnei-eretz.com?subject='+encodeURIComponent("מסמכים — "+(f.n||"")+" בניין "+(f.b||"")+" דירה "+(f.a||""))+'&body='+encodeURIComponent("שלום, מצורפים מסמכי ההרשמה/החוזה שלי. "+(f.n||""))+'" style="text-decoration:none;background:#fff;border:1.5px solid #B9AE97;color:#6E6350;border-radius:12px;padding:15px 10px;text-align:center;font-weight:700;font-size:14px">📎 שליחת מסמכי הרשמה וחוזה (צרפו קבצים למייל שנפתח)</a></div>'+
    '<div style="text-align:center;font-size:12px;color:#9B9080">אדני ארץ — שם שיכון ויזמות בע״מ · 02.659.0700 · Office@adnei-eretz.com</div></div>';
   const pi=document.getElementById("planimg");
   pi.onerror=function(){if(f.k&&!pi.retry){pi.retry=1;pi.src="plans/T"+f.k+".jpg"}else document.getElementById("planbox").style.display="none"};
   pi.src="plans/"+(f.u||"")+".jpg";
+  /* צ'אט דו-כיווני מול המערכת */
+  var SB="https://txleprrqcnyheuidgsaa.supabase.co/rest/v1/harsuf_messages";
+  var SK="sb_publishable_pIVUFleXJ0n1AL0LIbgpSA_vYlIxKKA";
+  var SH={apikey:SK,Authorization:"Bearer "+SK,"Content-Type":"application/json"};
+  var CH="company";
+  function tabs(){document.getElementById("tabC").style.cssText="flex:1;border-radius:999px;padding:9px;font-weight:700;font-size:13.5px;font-family:inherit;"+(CH==="company"?"border:none;background:#C9A566;color:#17130C":"border:1.5px solid #C9A566;background:#fff;color:#8F7440");
+   document.getElementById("tabL").style.cssText="flex:1;border-radius:999px;padding:9px;font-weight:700;font-size:13.5px;font-family:inherit;"+(CH==="lawyer"?"border:none;background:#C9A566;color:#17130C":"border:1.5px solid #C9A566;background:#fff;color:#8F7440")}
+  function loadMsgs(){fetch(SB+"?unit_id=eq."+encodeURIComponent(f.u||"")+"&channel=eq."+CH+"&select=*&order=created_at.asc&limit=200",{headers:SH})
+   .then(function(r){return r.json()}).then(function(ms){var t=document.getElementById("thread");if(!t)return;
+    t.innerHTML=(ms&&ms.length)?ms.map(function(m){var mine=m.sender==="customer";
+     return '<div style="max-width:80%;align-self:'+(mine?"flex-end":"flex-start")+';background:'+(mine?"#EFE5D2":"#fff")+';border:1px solid #E4DED2;border-radius:'+(mine?"12px 12px 3px 12px":"12px 12px 12px 3px")+';padding:8px 12px">'+
+      '<div style="font-size:10.5px;color:#8F7440;font-weight:700">'+(mine?(m.name||"אני"):((m.name||"נציג")+(m.sender==="lawyer"?" · עו״ד החברה":" · אדני ארץ")))+'</div>'+
+      '<div style="font-size:13.5px;color:#241F15">'+String(m.body).replace(/</g,"&lt;")+'</div>'+
+      '<div style="font-size:9.5px;color:#B9AE97;text-align:left">'+m.created_at.slice(5,16).replace("T"," ")+'</div></div>'}).join("")
+     :'<div style="text-align:center;color:#B9AE97;font-size:13px;padding:20px 0">'+(CH==="company"?"כתבו לנו — נשמח לעזור בכל שאלה 🏖️":"כאן ניתן לפנות ישירות לעו״ד המלווה של הפרויקט")+'</div>';
+    t.scrollTop=t.scrollHeight}).catch(function(){})}
+  function sendMsg(){var i=document.getElementById("msgin");var v=i.value.trim();if(!v)return;i.value="";
+   fetch(SB,{method:"POST",headers:SH,body:JSON.stringify({unit_id:f.u||"",channel:CH,sender:"customer",name:f.n||"רוכש",body:v})})
+    .then(function(){loadMsgs()}).catch(function(){alert("שגיאת שליחה — בדקו חיבור אינטרנט")})}
+  document.getElementById("tabC").onclick=function(){CH="company";tabs();loadMsgs()};
+  document.getElementById("tabL").onclick=function(){CH="lawyer";tabs();loadMsgs()};
+  document.getElementById("msgsend").onclick=sendMsg;
+  document.getElementById("msgin").addEventListener("keydown",function(e){if(e.key==="Enter")sendMsg()});
+  loadMsgs();setInterval(loadMsgs,15000);
   fetch("p.json?v="+Date.now().toString(36),{cache:"no-store"}).then(r=>r.json()).then(p=>{
    const idx=p.exec||0;document.getElementById("exfill").style.width=Math.round((idx+1)/EX.length*100)+"%";
    document.getElementById("exsteps").innerHTML=EX.map((s,i)=>'<span style="font-size:11.5px;padding:4px 10px;border-radius:999px;'+(i<idx?"background:#F0EADC;color:#8F7440":i===idx?"background:#C9A566;color:#17130C;font-weight:700":"background:#F7F4EE;color:#B9AE97")+'">'+s+'</span>').join("");
