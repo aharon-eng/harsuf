@@ -71,6 +71,7 @@
    '<div style="display:flex;gap:8px;margin-bottom:12px">'+
    '<button id="tabC" style="flex:1;border-radius:999px;padding:9px;border:none;background:#C9A566;color:#17130C;font-weight:700;font-size:13.5px;font-family:inherit">💬 צ׳אט עם החברה</button>'+
    '<button id="tabL" style="flex:1;border-radius:999px;padding:9px;border:1.5px solid #C9A566;background:#fff;color:#8F7440;font-weight:700;font-size:13.5px;font-family:inherit">⚖️ צ׳אט עם עו״ד</button></div>'+
+   '<div id="lawline" style="display:none;background:#F7F1E3;border:1px solid #E4DED2;border-radius:10px;padding:9px 12px;margin-bottom:10px;font-size:13px;color:#6E6350">📞 משרד עו״ד החברה: <a href="tel:05026362575" style="color:#8F7440;font-weight:700;text-decoration:none">050-2636-2575</a> · <a href="https://wa.me/9725026362575" style="color:#8F7440;font-weight:700;text-decoration:none">וואטסאפ ישיר</a></div>'+
    '<div id="thread" style="max-height:300px;min-height:120px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;background:#FBF9F4;border-radius:10px;padding:10px"></div>'+
    '<div style="display:flex;gap:8px;margin-top:10px">'+
    '<input id="msgin" placeholder="כתבו לנו הודעה..." style="flex:1;border:1.5px solid #E4DED2;border-radius:10px;padding:11px 12px;font-size:16px;font-family:inherit">'+
@@ -87,7 +88,8 @@
   var SK="sb_publishable_pIVUFleXJ0n1AL0LIbgpSA_vYlIxKKA";
   var SH={apikey:SK,Authorization:"Bearer "+SK,"Content-Type":"application/json"};
   var CH="company";
-  function tabs(){document.getElementById("tabC").style.cssText="flex:1;border-radius:999px;padding:9px;font-weight:700;font-size:13.5px;font-family:inherit;"+(CH==="company"?"border:none;background:#C9A566;color:#17130C":"border:1.5px solid #C9A566;background:#fff;color:#8F7440");
+  function tabs(){document.getElementById("lawline").style.display=(CH==="lawyer")?"block":"none";
+   document.getElementById("tabC").style.cssText="flex:1;border-radius:999px;padding:9px;font-weight:700;font-size:13.5px;font-family:inherit;"+(CH==="company"?"border:none;background:#C9A566;color:#17130C":"border:1.5px solid #C9A566;background:#fff;color:#8F7440");
    document.getElementById("tabL").style.cssText="flex:1;border-radius:999px;padding:9px;font-weight:700;font-size:13.5px;font-family:inherit;"+(CH==="lawyer"?"border:none;background:#C9A566;color:#17130C":"border:1.5px solid #C9A566;background:#fff;color:#8F7440")}
   function loadMsgs(){fetch(SB+"?unit_id=eq."+encodeURIComponent(f.u||"")+"&channel=eq."+CH+"&select=*&order=created_at.asc&limit=200",{headers:SH})
    .then(function(r){return r.json()}).then(function(ms){var t=document.getElementById("thread");if(!t)return;
